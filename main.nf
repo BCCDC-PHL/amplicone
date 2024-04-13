@@ -39,6 +39,8 @@ include {printHelp} from './modules/help.nf'
 include {convertFastaToAmplicons} from './modules/amplicone.nf'
 include {runART} from './modules/amplicone.nf'
 include {runARTVariableDepths} from './modules/amplicone.nf'
+include {primerSearch} from './modules/primersearch.nf'
+include {extractFastas} from './modules/primersearch.nf'
 
 
 
@@ -69,6 +71,13 @@ workflow {
 
 
   main:
+
+    if (params.emboss_primersearch){
+
+
+
+
+    }
 
     if (params.vary_amplicon_depths) {
 
