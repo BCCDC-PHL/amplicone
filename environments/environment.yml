@@ -8,3 +8,4 @@ dependencies:
   - biopython=1.74
   - pandas=0.23.0=py36_1
   - art=2016.06.05
+  - simug=1.0.0
