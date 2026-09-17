@@ -15,16 +15,16 @@ def convert_bed_to_multi_fasta(bed_file, fasta_file):
             if len(parts) == 7:
                 chrom, start, end, name, primer_pool, strand, primer_seqs = parts
 
-                amplicon_number = name.split("_")[-2]
-                position_key = f"amplicon{amplicon_number}"
+            amplicon_number = name.split("_")[-2]
+            position_key = f"amplicon{amplicon_number}"
 
-                if position_key not in amplicon_positions:
-                    amplicon_positions[position_key] = {"start": None, "end": None}
+            if position_key not in amplicon_positions:
+                amplicon_positions[position_key] = {"start": None, "end": None}
 
-                if "LEFT" in name:
-                    amplicon_positions[position_key]["start"] = int(start)
-                elif "RIGHT" in name:
-                    amplicon_positions[position_key]["end"] = int(end)
+            if "LEFT" in name:
+                amplicon_positions[position_key]["start"] = int(start)
+            elif "RIGHT" in name:
+                amplicon_positions[position_key]["end"] = int(end)
 
     fasta_base_name = os.path.splitext(os.path.basename(fasta_file))[0]
     output_file = f"{fasta_base_name}_amplicon.fasta"
@@ -37,7 +37,7 @@ def convert_bed_to_multi_fasta(bed_file, fasta_file):
                 end = positions["end"]
                 if start is not None and end is not None:
                     amplicon_sequence = record.seq[start : end]
-                    amplicon_record = f">{amplicon_number}\n{amplicon_sequence}\n"
+                    amplicon_record = f">{fasta_base_name}_{amplicon_number}\n{amplicon_sequence}\n"
                     output.write(amplicon_record)
 
 def main(args):
